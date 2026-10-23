@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alex Hernandez · Virtual Executive Assistant</title>
+<meta name="description" content="Alex Hernandez is a remote executive assistant with 7+ years supporting leaders: calendars, reporting, bookkeeping, social media, and lead generation.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%231F4E79'/%3E%3Cpath d='M18 33l10 10 19-22' stroke='%23C9A45C' stroke-width='7' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0B1F33;--chalk:#F5F7FA;--signal:#1F4E79;--gold:#C9A45C;--mint:#DCE6EF;--line:#DDE3EA;--card:#fff;
+--d:'Bricolage Grotesque','Trebuchet MS',system-ui,sans-serif;--b:'DM Sans',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font:400 17px/1.6 var(--b);color:var(--ink);background:var(--chalk);overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--d);line-height:1.05;letter-spacing:-.02em}
+h1{font-size:clamp(2.6rem,6vw,4.6rem);font-weight:700}
+h2{font-size:clamp(2rem,4vw,3rem);font-weight:800;margin-bottom:12px}
+section{padding:96px 0}
+.lead{max-width:60ch;opacity:.8}
+/* nav */
+nav{position:sticky;top:0;z-index:20;background:rgba(245,247,250,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;gap:24px;height:68px}
+.brand{display:flex;align-items:center;gap:10px;font:800 1.15rem var(--d);text-decoration:none}
+.logo{width:36px;height:36px;border-radius:11px;background:var(--signal);display:grid;place-items:center}
+.logo svg{width:22px;height:22px}
+.brand:hover .logo path{stroke-dashoffset:0;animation:draw .6s}
+nav ul{display:flex;gap:22px;list-style:none;margin-left:auto;padding:0}
+nav ul a{text-decoration:none;font-weight:500;font-size:.95rem;opacity:.75}
+nav ul a:hover{opacity:1}
+.btn{display:inline-block;border:0;cursor:pointer;font:700 1rem var(--b);padding:14px 24px;border-radius:999px;background:var(--signal);color:#fff;text-decoration:none;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(11,31,51,.25)}
+.btn:active{transform:translateY(0);box-shadow:none}
+.btn.gold{background:var(--gold);color:var(--ink)}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+.btn.sm{padding:9px 18px;font-size:.92rem}
+@media(max-width:760px){nav ul{display:none}nav .btn{margin-left:auto}}
+/* hero */
+.hero{padding:72px 0 88px}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.hero h1 span{display:block;animation:rise .8s both}
+.hero h1 span:nth-child(2){animation-delay:.12s;color:var(--signal)}
+.hero p{margin:24px 0 32px;font-size:1.15rem;max-width:46ch;animation:rise .8s .3s both}
+.hero .cta{display:flex;gap:14px;flex-wrap:wrap;animation:rise .8s .45s both}
+.typed{font-weight:700;border-bottom:2px solid var(--gold)}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}}
+/* board */
+.board{background:var(--ink);color:#fff;border-radius:28px;padding:26px;box-shadow:0 28px 60px rgba(11,31,51,.28);transform:none;animation:rise .9s .2s both}
+.board header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.board h3{font-size:1.3rem}
+.count{font:700 .9rem var(--b);color:var(--gold)}
+.board small{opacity:.65;display:block;margin-bottom:16px}
+.bar{height:8px;background:#24405C;border-radius:9px;margin-bottom:18px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--mint);transition:width .5s}
+.task{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#16324D;color:#fff;border:0;border-radius:14px;padding:13px 14px;margin-bottom:9px;font:500 .98rem var(--b);cursor:pointer;transition:background .2s,transform .2s}
+.task:hover{background:#1F4466;transform:translateX(5px)}
+.task .box{flex:none;width:24px;height:24px;border-radius:8px;border:2px solid #6E8CAB;display:grid;place-items:center;transition:.25s}
+.task .box svg{width:14px;opacity:0;transform:scale(.4);transition:.25s}
+.task.done{background:#1D4A52}
+.task.done .box{background:var(--mint);border-color:var(--mint)}
+.task.done .box svg{opacity:1;transform:scale(1)}
+.task.done .t{text-decoration:line-through;opacity:.6}
+.task .who{margin-left:auto;font-size:.78rem;color:var(--mint);opacity:0;transition:.3s}
+.task.done .who{opacity:1}
+.win{display:none;margin-top:14px;padding:16px;border-radius:16px;background:var(--mint);color:var(--ink);font-weight:500}
+.win.show{display:block;animation:pop .5s}
+.win a{font-weight:700}
+.reset{background:none;border:0;color:#9FB6CC;font:500 .85rem var(--b);cursor:pointer;margin-top:10px;text-decoration:underline}
+/* stats */
+.stats{background:var(--ink);color:#fff;padding:56px 0}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.stats b{display:block;font:800 clamp(2.2rem,5vw,3.6rem)/1 var(--d)}
+.stats span{opacity:.85;font-size:.95rem}
+@media(max-width:760px){.stats .wrap{grid-template-columns:1fr 1fr}}
+/* about */
+.about .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:center}
+.pic{position:relative;aspect-ratio:4/5;border-radius:24px;background:linear-gradient(160deg,#16324D,#0B1F33);overflow:hidden;color:#C9A45C;display:grid;place-items:center;font:800 6rem var(--d)}
+.pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom}
+.about p{margin-bottom:16px;max-width:62ch}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.pills span{background:#fff;border:1px solid var(--line);padding:6px 14px;border-radius:999px;font-size:.9rem}
+@media(max-width:860px){.about .wrap{grid-template-columns:1fr}.pic{max-width:320px}}
+/* services */
+.svc{background:#fff}
+.tabs{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0}
+.tab{border:1px solid var(--ink);background:transparent;color:var(--ink);font:700 .95rem var(--b);padding:10px 20px;border-radius:999px;cursor:pointer;transition:.2s}
+.tab:hover{background:var(--line)}
+.tab[aria-selected=true]{background:var(--ink);color:#fff}
+.panel{display:none;background:var(--chalk);border-radius:28px;padding:36px;grid-template-columns:1fr 1fr;gap:32px}
+.panel.on{display:grid;animation:pop .4s}
+.panel h3{font-size:1.7rem;margin-bottom:10px}
+.panel ul{list-style:none;padding:0}
+.panel li{padding:11px 0 11px 34px;border-bottom:1px solid var(--line);position:relative}
+.panel li:before{content:"";position:absolute;left:0;top:15px;width:18px;height:18px;border-radius:6px;background:var(--mint) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12l5 5 9-10' stroke='%230B1F33' stroke-width='3' fill='none'/%3E%3C/svg%3E") center/12px no-repeat}
+@media(max-width:760px){.panel.on{grid-template-columns:1fr;padding:24px}}
+/* work */
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:22px;align-items:start}
+.card{background:#fff;border-radius:24px;overflow:hidden;border:1px solid var(--line);text-align:left;cursor:pointer;font:inherit;color:inherit;padding:0;transition:transform .25s,box-shadow .25s}
+.card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,31,51,.15)}
+.card.hide{display:none}
+.thumb{height:190px;position:relative;display:grid;place-items:center;font:800 1.5rem var(--d);overflow:hidden}
+.thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .5s}
+.card:hover .thumb img{transform:scale(1.06)}
+.more img{display:block;width:100%;border-radius:12px;margin-top:14px;border:1px solid var(--line)}
+.card .body{padding:20px 22px}
+.card h3{font-size:1.25rem;margin-bottom:6px}
+.card .tag{font-size:.85rem;font-weight:700;color:var(--signal)}
+.more{max-height:0;overflow:hidden;transition:max-height .4s;font-size:.95rem}
+.card.open .more{max-height:1400px}
+.more p{padding-top:12px}
+.hint{font-size:.85rem;opacity:.6;margin-top:10px;display:block}
+/* tools */
+.tools{background:var(--signal);color:#fff;padding:64px 0;overflow:hidden}
+.tools h2{margin-bottom:28px}
+.track{display:flex;gap:12px;width:max-content;animation:slide 40s linear infinite}
+.tools:hover .track{animation-play-state:paused}
+.track span{background:rgba(255,255,255,.12);padding:10px 20px;border-radius:999px;white-space:nowrap;font-weight:500}
+/* process */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:32px}
+.step{background:#fff;border-radius:18px;padding:28px;border:1px solid var(--line)}
+.step:nth-child(2){background:#fff}
+.step:nth-child(3){background:#fff}
+.step b{font:800 2.2rem var(--d);color:var(--gold)}
+.step h3{font-size:1.25rem;margin:8px 0}
+@media(max-width:860px){.steps{grid-template-columns:1fr}}
+/* contact */
+.contact{background:var(--ink);color:#fff;text-align:center}
+.contact h2{font-size:clamp(2.4rem,6vw,4.4rem)}
+.contact p{margin:12px auto 32px;max-width:50ch;opacity:.9}
+.contact .row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.contact .btn.ghost{color:#fff;box-shadow:inset 0 0 0 2px #fff}
+.contact .btn:hover{box-shadow:0 10px 24px rgba(0,0,0,.3)}
+footer{padding:28px 0;font-size:.9rem;text-align:center;background:var(--ink);color:#fff;opacity:1}
+#toast{position:fixed;bottom:28px;left:50%;transform:translate(-50%,120px);background:var(--ink);color:#fff;padding:12px 22px;border-radius:999px;transition:.35s;z-index:50}
+#toast.show{transform:translate(-50%,0)}
+#top{position:fixed;right:20px;bottom:20px;width:48px;height:48px;border-radius:50%;border:0;background:var(--gold);color:var(--ink);font-size:1.3rem;font-weight:800;cursor:pointer;opacity:0;pointer-events:none;transition:.3s}
+#top.show{opacity:1;pointer-events:auto}
+@keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+@keyframes slide{to{transform:translateX(-50%)}}
+@keyframes draw{from{stroke-dashoffset:40}to{stroke-dashoffset:0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+
+#modal{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(11,31,51,.82)}
+#modal.show{display:flex;animation:pop .25s}
+#modal .box{background:#fff;border-radius:20px;max-width:1000px;width:100%;max-height:92vh;overflow:auto;position:relative}
+#modal .box img{display:block;width:100%;background:var(--chalk)}
+#modal .txt{padding:22px 28px 28px}
+#modal h3{font-size:1.5rem;margin:4px 0 8px}
+#modal .x{position:sticky;top:12px;float:right;margin:12px 12px 0 0;width:40px;height:40px;border-radius:50%;border:0;background:var(--ink);color:#fff;font-size:1.3rem;cursor:pointer;z-index:2}
+#modal .nf{padding:40px;text-align:center;opacity:.7}
+
+.form{background:#fff;color:var(--ink);border-radius:20px;max-width:620px;margin:40px auto 0;padding:28px;text-align:left;display:grid;gap:14px}
+.form h3{font-size:1.3rem}
+.form label{font-weight:700;font-size:.9rem;display:grid;gap:6px}
+.form input,.form textarea{font:400 1rem var(--b);color:var(--ink);padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--chalk);width:100%}
+.form textarea{min-height:120px;resize:vertical}
+.form input:focus,.form textarea:focus{outline:2px solid var(--signal);border-color:var(--signal)}
+.form .hp{position:absolute;left:-9999px}
+.form .btn{justify-self:start}
+.form .btn:disabled{opacity:.6;cursor:wait}
+#fstat{font-weight:500;min-height:1.4em}
+#fstat.ok{color:#1B7F4B}#fstat.err{color:#B3261E}
+</style>
+</head>
+<body>
+
+<nav>
+ <div class="wrap">
+  <a class="brand" href="#top-of-page" aria-label="Alex Hernandez, home">
+   <span class="logo"><svg viewBox="0 0 24 24"><path d="M4 13l5 5 11-12" fill="none" stroke="#C9A45C" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="40"/></svg></span>
+   Alex, Handled.
+  </a>
+  <ul>
+   <li><a href="#about">About</a></li>
+   <li><a href="#services">Services</a></li>
+   <li><a href="#work">Work</a></li>
+   <li><a href="#process">How I work</a></li>
+  </ul>
+  <a class="btn sm gold" href="#contact">Hire Alex</a>
+ </div>
+</nav>
+
+<header class="hero" id="top-of-page">
+ <div class="wrap">
+  <div>
+   <h1><span>Hand it to Alex.</span><span>Consider it handled.</span></h1>
+   <p>I'm Alex Hernandez, a remote virtual executive assistant with 7+ years keeping leaders organized. I handle <span class="typed" id="typed">your calendar</span><span aria-hidden="true">|</span></p>
+   <div class="cta">
+    <a class="btn" href="#contact">Book an intro call</a>
+    <a class="btn ghost" href="#work">See my work</a>
+   </div>
+  </div>
+  <aside class="board" aria-label="Try it: hand tasks to Alex">
+   <header><h3>Your Monday</h3><span class="count" id="count">0 of 6 handled</span></header>
+   <small>Tap a task to hand it off to me.</small>
+   <div class="bar"><i id="bar"></i></div>
+   <div id="tasks"></div>
+   <div class="win" id="win">Inbox cleared. That's the feeling I give my clients every week. <a href="#contact">Let's talk</a></div>
+   <button class="reset" id="reset">Start over</button>
+  </aside>
+ </div>
+</header>
+
+<div class="stats">
+ <div class="wrap">
+  <div><b><span data-n="7">0</span>+</b><span>years supporting executive leadership</span></div>
+  <div><b>₱<span data-n="54">0</span>M</b><span>in financial records audited</span></div>
+  <div><b><span data-n="100">0</span>%</b><span>accuracy on those audits</span></div>
+  <div><b><span data-n="10">0</span></b><span>services under one roof</span></div>
+ </div>
+</div>
+
+<section class="about" id="about">
+ <div class="wrap">
+  <div class="pic">AH<img src="photo.png" alt="Portrait of Alex Hernandez" onerror="this.remove()"></div>
+  <div>
+   <h2>Hey, I'm Alex.</h2>
+   <p>I'm a digital professional with a real passion for executive support and social media management. For 7+ years I've supported leaders through calendar management, executive communications, reporting, documentation, financial administration, and cross-functional coordination.</p>
+   <p>I also bring bookkeeping support, data management, records administration, and process documentation from healthcare operations. I'm known for auditing over ₱54M in financial records with 100% accuracy while making reporting and admin workflows faster.</p>
+   <p>You get organized, proactive, dependable support, built for remote teams.</p>
+   <p><a class="btn sm" href="#contact">Work with me</a></p>
+   <div class="pills"><span>Microsoft 365</span><span>Google Workspace</span><span>QuickBooks Online (Basic)</span><span>Trello</span><span>Asana</span><span>AI productivity tools</span></div>
+  </div>
+ </div>
+</section>
+
+<section class="svc" id="services">
+ <div class="wrap">
+  <h2>What I can take off your plate</h2>
+  <p class="lead">Pick an area to see what's included.</p>
+  <div class="tabs" role="tablist" id="tabs"></div>
+  <div id="panels"></div>
+ </div>
+</section>
+
+<section id="work">
+ <div class="wrap">
+  <h2>Proof of work</h2>
+  <p class="lead">Sample projects and tools I've built. Tap any card for details.</p>
+  <div class="filters" id="filters"></div>
+  <div class="grid" id="grid"></div>
+ </div>
+</section>
+
+<div class="tools">
+ <div class="wrap"><h2>Tools I work in daily</h2></div>
+ <div class="track" id="track"></div>
+</div>
+
+<section id="process">
+ <div class="wrap">
+  <h2>How working with me goes</h2>
+  <p class="lead">No guesswork. You always know what's done and what's next.</p>
+  <div class="steps">
+   <div class="step"><b>1</b><h3>You tell me what's piling up</h3><p>We talk through your calendar, inbox, books, or content. I ask the questions so you don't have to explain twice.</p></div>
+   <div class="step"><b>2</b><h3>I set up the system</h3><p>I document the process, build the trackers and templates, and set up the tools you already use, such as Google Workspace, Asana, or Trello.</p></div>
+   <div class="step"><b>3</b><h3>I run it and report back</h3><p>Tasks get done on time, and you get clear reports so you can see the work without checking on it.</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="contact" id="contact">
+ <div class="wrap">
+  <h2>Let's get your week handled.</h2>
+  <p>Tell me what you need off your plate and I'll reply with how I can help.</p>
+  <div class="row">
+   <a class="btn gold" id="book" href="#contact" target="_blank" rel="noopener" hidden data-track="book-call">Book a call</a>
+   <a class="btn gold" href="mailto:markalexishernandez.va@gmail.com?subject=Hiring%20Alex%20as%20my%20VA" data-track="email-click">Email me</a>
+   <button class="btn ghost" id="copy">Copy my email</button>
+   <a class="btn ghost" href="https://www.linkedin.com/in/mark-alexis-hernandez-11ab13393/" target="_blank" rel="noopener" data-track="linkedin-click">LinkedIn</a>
+  </div>
+
+  <form class="form" id="cform" novalidate>
+   <h3>Or send me a message</h3>
+   <label>Your name<input name="name" autocomplete="name" required></label>
+   <label>Your email<input name="email" type="email" autocomplete="email" required></label>
+   <label>What do you need help with?<textarea name="message" required></textarea></label>
+   <input class="hp" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+   <button class="btn" type="submit" id="fbtn">Send message</button>
+   <div id="fstat" role="status"></div>
+  </form>
+ </div>
+</section>
+
+<footer>© <span id="yr"></span> Alex Hernandez. Remote executive assistant.</footer>
+<button id="top" aria-label="Back to top">↑</button>
+<div id="modal" role="dialog" aria-modal="true" aria-label="Project details"><div class="box"><button class="x" id="mx" aria-label="Close">×</button><div id="mimg"></div><div class="txt"><span class="tag" id="mtag" style="font-weight:700;color:var(--signal);font-size:.85rem"></span><h3 id="mt"></h3><p id="md"></p><p style="margin-top:18px"><a class="btn sm" href="#contact" id="mcta">I need something like this</a></p></div></div></div>
+<div id="toast" role="status"></div>
+
+<script>
+const $=s=>document.querySelector(s);
+/* ---- CONFIG: edit your email here ---- */
+const EMAIL="markalexishernandez.va@gmail.com";
+$("#yr").textContent=new Date().getFullYear();
+
+/* typed line */
+const words=["your calendar.","your inbox.","your bookkeeping.","your social media.","your lead lists.","your reports."];
+let w=0,c=0,del=false;const el=$("#typed");
+(function tick(){const t=words[w];c+=del?-1:1;el.textContent=t.slice(0,c);let ms=del?35:70;
+ if(!del&&c===t.length){del=true;ms=1400}else if(del&&c===0){del=false;w=(w+1)%words.length;ms=300}
+ setTimeout(tick,ms)})();
+
+/* hand-off board */
+const tasks=["Reschedule the 3pm across 3 time zones","Reconcile last month's expenses","Draft the investor update email","Book flights and a hotel for Singapore","Schedule this week's social posts","Build a prospect list of 50 leads"];
+const box=$("#tasks");let done=0;
+const tick='<svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10" fill="none" stroke="#0B1F33" stroke-width="3.5" stroke-linecap="round"/></svg>';
+function build(){box.innerHTML="";done=0;upd();tasks.forEach(t=>{const b=document.createElement("button");b.className="task";
+ b.innerHTML='<span class="box">'+tick+'</span><span class="t">'+t+'</span><span class="who">Handled</span>';
+ b.onclick=()=>{b.classList.toggle("done");done=box.querySelectorAll(".done").length;upd()};box.appendChild(b)})}
+function upd(){$("#count").textContent=done+" of "+tasks.length+" handled";$("#bar").style.width=done/tasks.length*100+"%";$("#win").classList.toggle("show",done===tasks.length)}
+$("#reset").onclick=build;build();
+
+/* counters */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;io.unobserve(e.target);
+ const n=+e.target.dataset.n;let i=0;const s=Math.max(1,Math.ceil(n/40));
+ const iv=setInterval(()=>{i=Math.min(n,i+s);e.target.textContent=i;if(i===n)clearInterval(iv)},30)}),{threshold:.6});
+document.querySelectorAll("[data-n]").forEach(n=>io.observe(n));
+
+/* services */
+const svc=[
+["Executive support","Keep leaders organized and moving",["Calendar and executive scheduling","Executive communications and inbox support","Reporting and documentation","Travel planning: itineraries, hotel comparisons, bookings","Expense and reimbursement reports","Cross-functional coordination"]],
+["Social media and brand","Content that looks like one brand",["Social media management","Branding and design","Social graphics and promo posts","Copywriting and content writing","Short-form video editing"]],
+["Web and email","Pages and emails that convert",["Landing page design and creation","Website design and development","Email marketing and newsletter design","Responsive layouts for desktop and mobile"]],
+["Books and data","Clean numbers you can trust",["Bookkeeping support (QuickBooks Online)","Audits of financial records: ₱54M at 100% accuracy","Data entry and data management","Records administration and process documentation","Analytics and reporting dashboards"]],
+["Lead generation","Pipelines that stay organized",["Prospect research and network search tools","Lead tracking dashboards","Custom CRM views by function, seniority, and industry","Outreach stage tracking and follow-up lists"]]];
+svc.forEach((s,i)=>{const t=document.createElement("button");t.className="tab";t.role="tab";t.textContent=s[0];t.setAttribute("aria-selected",i==0);
+ const p=document.createElement("div");p.className="panel"+(i==0?" on":"");
+ p.innerHTML='<div><h3>'+s[0]+'</h3><p>'+s[1]+'.</p><p style="margin-top:20px"><a class="btn sm" href="#contact">Ask me about this</a></p></div><ul>'+s[2].map(x=>"<li>"+x+"</li>").join("")+"</ul>";
+ t.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-selected",x===t));document.querySelectorAll(".panel").forEach(x=>x.classList.toggle("on",x===p))};
+ $("#tabs").appendChild(t);$("#panels").appendChild(p)});
+
+/* work */
+const work=[
+["Social","Social media graphics","Promo posts for a pickleball and badminton shop, a five-flavor shake menu series, and a T-shirt mockup.","Pickleball, badminton and shake promos, apparel mockups.","#C9A45C","assets/social.jpg"],
+["Email","Welcome email for a solar company","A branded welcome email with a hero banner, short copy, social links, and footer, designed to read well on desktop and phone.","Responsive email design for Alex & Co. Solar.","#DCE6EF","assets/email.jpg"],
+["Web","Landing pages","Two landing pages: Smasher's Lounge (badminton gear) and Torque District (motorcycle gear), each with a clear headline and navigation.","Smasher's Lounge and Torque District.","#1F4E79","assets/landing.jpg"],
+["EA tools","Travel planning suite","Hotel comparison summary and matrix, trip itinerary, travel planner with countdown, bookings and wallet with live currency conversion, and a packing list.","Everything an exec needs before a trip.","#C9A45C","assets/travel.jpg"],
+["EA tools","Expense and reimbursement system","Expense log with receipt links, exchange rate reference using live Google Finance rates, and a reimbursement report with approval status.","Multi-currency expense tracking.","#DCE6EF","assets/expenses.jpg"],
+["EA tools","Meeting agenda template","Agenda with time zone conversion, pre-read links, action items with owners and deadlines, and next-meeting details.","Meetings that end with clear next steps.","#1F4E79","assets/agenda.jpg"],
+["EA tools","Job application tracker","Dashboard with key metrics, status breakdown, applications by platform, and weekly activity.","Tracks applications, response rate, and follow-ups.","#C9A45C","assets/tracker.jpg"],
+["Lead gen","Network intelligence dashboard","Dashboard that breaks down 93 profiles by seniority, function, industry, and country, with charts and a searchable, filterable network list ranked by priority score.","Decision-maker mapping with charts.","#DCE6EF","assets/network.jpg"],
+["Lead gen","Lead generation dashboard","Daily prospecting view with lead status, source, LinkedIn connection status, scheduled calls, and a contact list.","Daily prospecting overview.","#1F4E79","assets/leads.jpg"],
+["Lead gen","Custom lead CRM","A dark-mode CRM for 15,927 profiles with filters, priority scores, outreach stages, notes, and a pipeline board.","Searchable pipeline for thousands of contacts.","#C9A45C","assets/crm.jpg"]];
+const cats=["All",...new Set(work.map(x=>x[0]))];
+cats.forEach((k,i)=>{const b=document.createElement("button");b.className="tab";b.textContent=k;b.setAttribute("aria-selected",i==0);
+ b.onclick=()=>{document.querySelectorAll("#filters .tab").forEach(x=>x.setAttribute("aria-selected",x===b));
+  document.querySelectorAll(".card").forEach(c=>c.classList.toggle("hide",k!=="All"&&c.dataset.k!==k))};
+ $("#filters").appendChild(b)});
+work.forEach(x=>{const c=document.createElement("button");c.className="card";c.dataset.k=x[0];
+ c.innerHTML='<div class="thumb" style="background:'+x[4]+';color:'+(x[4]=="#1F4E79"?"#fff":"#0B1F33")+'">'+x[1].split(" ")[0]+'<img src="'+x[5]+'" alt="" onerror="this.remove()"></div><div class="body"><span class="tag">'+x[0]+'</span><h3>'+x[1]+'</h3><p>'+x[3]+'</p><span class="hint">Click to view full project</span></div>';
+ c.onclick=()=>openM(x);
+ $("#grid").appendChild(c)});
+
+/* tools */
+const tl=["Microsoft 365","Google Workspace","QuickBooks Online","Trello","Asana","Canva","Google Docs","Google Sheets","Slides","Photoshop","Illustrator","CapCut","ChatGPT","Gemini","Grammarly","Gmail","LinkedIn","WhatsApp","Telegram","Facebook","Instagram","TikTok","Pinterest","Snapchat","X","GitHub","Google Photos"];
+$("#track").innerHTML=[...tl,...tl].map(t=>"<span>"+t+"</span>").join("");
+
+/* contact, toast, back to top */
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2200)}
+$("#copy").onclick=()=>{(navigator.clipboard?navigator.clipboard.writeText(EMAIL):Promise.reject()).then(()=>toast("Email copied"),()=>toast(EMAIL))};
+addEventListener("scroll",()=>$("#top").classList.toggle("show",scrollY>600));
+$("#top").onclick=()=>scrollTo({top:0});
+
+function openM(x){const m=$("#modal");$("#mtag").textContent=x[0];$("#mt").textContent=x[1];$("#md").textContent=x[2];
+ const i=new Image();i.alt=x[1]+" sample";i.src=x[5];$("#mimg").innerHTML="";
+ i.onload=()=>$("#mimg").appendChild(i);i.onerror=()=>{$("#mimg").innerHTML='<div class="nf">Preview image not found. Upload the assets folder next to index.html.</div>'};
+ m.classList.add("show");document.body.style.overflow="hidden";$("#mx").focus()}
+function closeM(){$("#modal").classList.remove("show");document.body.style.overflow=""}
+$("#mx").onclick=closeM;$("#mcta").onclick=closeM;
+$("#modal").onclick=e=>{if(e.target.id==="modal")closeM()};
+addEventListener("keydown",e=>{if(e.key==="Escape")closeM()});
+/* ---- Optional integrations: fill these in to switch them on ---- */
+const FORMSPREE_ID="";      // from formspree.io, e.g. "xyzabcde"
+const BOOKING_URL="";       // your Calendly / Google Calendar booking link
+const GOATCOUNTER_CODE="";  // your GoatCounter site code, e.g. "alexhernandez"
+
+/* analytics (privacy-friendly, loads only if a code is set) */
+if(GOATCOUNTER_CODE){const g=document.createElement("script");g.async=true;g.dataset.goatcounter="https://"+GOATCOUNTER_CODE+".goatcounter.com/count";g.src="https://gc.zgo.at/count.js";document.head.appendChild(g)}
+document.addEventListener("click",e=>{const t=e.target.closest("[data-track]");if(t&&window.goatcounter&&goatcounter.count)goatcounter.count({path:"click-"+t.dataset.track,title:t.dataset.track,event:true})});
+
+/* booking */
+if(BOOKING_URL){const b=$("#book");b.href=BOOKING_URL;b.hidden=false;
+ document.querySelectorAll('a[href="#contact"].btn').forEach(a=>{if(a.id!=="book"&&/intro call|Hire Alex/.test(a.textContent)){a.href=BOOKING_URL;a.target="_blank";a.rel="noopener";a.dataset.track="book-call"}})}
+
+/* contact form */
+$("#cform").addEventListener("submit",async e=>{e.preventDefault();const f=e.target,st=$("#fstat"),btn=$("#fbtn");
+ const d=Object.fromEntries(new FormData(f));st.className="";
+ if(d._gotcha)return;
+ if(!d.name.trim()||!/^\S+@\S+\.\S+$/.test(d.email)||!d.message.trim()){st.className="err";st.textContent="Please fill in your name, a valid email, and a message.";return}
+ if(!FORMSPREE_ID){location.href="mailto:"+EMAIL+"?subject="+encodeURIComponent("Message from "+d.name)+"&body="+encodeURIComponent(d.message+"\n\nReply to: "+d.email);st.className="ok";st.textContent="Opening your email app. If nothing opens, write to "+EMAIL+".";return}
+ btn.disabled=true;st.textContent="Sending...";
+ try{const r=await fetch("https://formspree.io/f/"+FORMSPREE_ID,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(d)});
+  if(!r.ok)throw 0;f.reset();st.className="ok";st.textContent="Thanks, your message is in. I'll reply by email soon.";
+  if(window.goatcounter&&goatcounter.count)goatcounter.count({path:"form-sent",title:"form-sent",event:true})}
+ catch(_){st.className="err";st.textContent="Couldn't send. Please email "+EMAIL+" instead."}
+ btn.disabled=false});
+</script>
+</body>
+</html>
